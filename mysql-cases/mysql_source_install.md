@@ -1210,8 +1210,47 @@ Completed: All 1037 tests were successful.
 </details>
 
 # 启动
-1. MySQL实例初始化
+
+1. MySQL实例初始化(**提前配置文件3306.cnf**)
+`./bin/mysqld --defaults-file=./etc/3306.cnf --initialize-insecure`
+**初始化后数据目录文件**
+```
+# ls -lh /db/3306/{data,logs}
+
+/db/3306/data:
+total 5.1G
+-rw-r----- 1 mysql mysql   56 Apr 15 09:50 auto.cnf
+-rw-r----- 1 mysql mysql  432 Apr 15 09:50 ib_buffer_pool
+-rw-r----- 1 mysql mysql 1.0G Apr 15 09:50 ibdata1
+-rw-r----- 1 mysql mysql 2.0G Apr 15 09:50 ibdata2
+-rw-r----- 1 mysql mysql 1.0G Apr 15 09:50 ib_logfile0
+-rw-r----- 1 mysql mysql 1.0G Apr 15 09:50 ib_logfile1
+drwxr-x--- 2 mysql mysql 4.0K Apr 15 09:50 mysql
+drwxr-x--- 2 mysql mysql 4.0K Apr 15 09:50 performance_schema
+drwxr-x--- 2 mysql mysql  12K Apr 15 09:50 sys
+-rw-r----- 1 mysql mysql  10M Apr 15 09:50 undo001
+-rw-r----- 1 mysql mysql  10M Apr 15 09:50 undo002
+-rw-r----- 1 mysql mysql  10M Apr 15 09:50 undo003
+
+/db/3306/logs:
+total 16K
+-rw-r----- 1 mysql mysql  177 Apr 15 09:50 mysql-bin.000001
+-rw-r----- 1 mysql mysql   31 Apr 15 09:50 mysql-bin.index
+-rw-r----- 1 mysql mysql 1.8K Apr 15 09:50 mysql-error.log
+-rw-r----- 1 mysql mysql  168 Apr 15 09:50 mysql-slow.log
+```
+
 2. MySQL实例启动
+`./bin/mysqld_safe --defaults-file=./etc/3306.cnf &`
+**启动输出**
+```
+# ./bin/mysqld_safe --defaults-file=./etc/3306.cnf 
+&
+[1] 233597
+root@*:/usr/local/mysql# 2020-04-15T01:53:30.953137Z mysqld_safe Logging to '/db/3306/logs/mysql-error.log'.
+2020-04-15T01:53:30.968803Z mysqld_safe Starting mysqld daemon with databases from /db/3306/data
+```
+
 
 # 安装脚本
 
